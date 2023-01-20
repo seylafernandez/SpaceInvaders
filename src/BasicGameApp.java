@@ -1,9 +1,14 @@
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 import java.awt.*;
 import javax.swing.*;
-import java.awt.event.*;
-public class BasicGameApp implements MouseListener, MouseMotionListener, KeyListener, Runnable {
+
+
+public class BasicGameApp implements MouseListener, KeyListener, Runnable {
 
     final int WIDTH = 1000;
     final int HEIGHT = 700;
@@ -13,50 +18,81 @@ public class BasicGameApp implements MouseListener, MouseMotionListener, KeyList
     public JPanel panel;
     public BufferStrategy bufferStrategy;
 
-    public int mouseX, mouseY;
-
-    public Button button1;
-
     public static void main(String[] args) {
-        BasicGameApp myApp = new BasicGameApp();   //creates a new instance of the game
-        new Thread(myApp).start();               //creates a threads & starts up the code in the run( ) method
-    }
-
-    public BasicKeyboardApp() {
-
-        setUpGraphics();
-        canvas.addMouseListener(this);
-        canvas.addMouseMotionListener(this);
-        canvas.addKeyListener(this);
-
-
+        BasicGameApp myGame = new BasicGameApp();
+        new Thread(myGame).start();
     }
 
     public BasicGameApp() {
-
         setUpGraphics();
         canvas.addKeyListener(this);
-    }
+        canvas.addMouseListener(this);
 
+    }
+    public void run() {
+        while (true){
+            moveThings();
+            checkIntersections();
+            render();
+            pause(20);
+        }
+
+    }
     public void render() {
         Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
         g.clearRect(0, 0, WIDTH, HEIGHT);
         g.dispose();
         bufferStrategy.show();
+
+
+    }
+    public void moveThings() {
+
     }
 
-    public void keyPressed(KeyEvent event) {
-        char key = event.getKeyChar();
-        int keyCode = event.getKeyCode();
-        System.out.println("Key Pressed: " + key + "  Code: " + keyCode);
+    public void checkIntersections(){
+
     }
 
-    public void keyReleased(KeyEvent event) {
-        char key = event.getKeyChar();
-        int keyCode = event.getKeyCode();
+    public void keyPressed(KeyEvent e) {
     }
 
-    public void keyTyped(KeyEvent event) {
+    public void keyReleased(KeyEvent e) {
+
+    }
+
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    public void mouseDragged(MouseEvent e) {
+    }
+
+    public void mouseMoved(MouseEvent e) {
+
+
     }
 
     public void setUpGraphics() {
@@ -92,59 +128,7 @@ public class BasicGameApp implements MouseListener, MouseMotionListener, KeyList
         } catch (InterruptedException e) {
 
         }
-
-        public void mouseClicked{
-
-            int x, y;
-            x = e.getX();
-            y = e.getY();
-
-            mouseX = x;
-            mouseY = y;
-            System.out.println();
-            System.out.println("Mouse Clicked at " + x + ", " + y);
-
-            if (button1.rec.contains(x, y)) {
-                System.out.println("TIMER STARTED");
-                startTime = System.currentTimeMillis();
-                startTimer = true;
-            }
-
-        }
-
-        public void mousePressed (MouseEvent) {
-                System.out.println();
-        System.out.println("Mouse Button Pressed");
-        }
-
-        public void mouseReleased (MouseEvent) {
-
-
-                System.out.println();
-        System.out.println("Mouse Button Released");
-        }
-
-        @Override
-        public void mouseEntered (MouseEvent e){
-            System.out.println();
-            System.out.println("Mouse has entered the window");
-
-        }
-
-        @Override
-        public void mouseExited (MouseEvent e){
-            System.out.println();
-            System.out.println("Mouse has left the window");
-
-        }
-
-        public void mouseDragged (MouseEvent e){
-            System.out.println("Mouse is being dragged");
-        }
-
-        public void mouseMoved(MouseEvent e){
-
-        }
-
-
     }
+
+}
+
